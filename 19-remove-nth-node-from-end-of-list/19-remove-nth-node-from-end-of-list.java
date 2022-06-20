@@ -14,22 +14,7 @@ class Solution {
         p.next=head;
         ListNode fast= p;
         ListNode slow= p;
-        
-        if(head.next==null){
-            head=null;
-            return head;
-        }
-        if(head.next.next==null){
-            if(n==2){
-            head=head.next;
-            return head;
-            }
-            else if(n==1){
-                head.next=null;
-                return head;
-            }
-        }
-        
+ 
         for(int i=1;i<=n;i++)
             fast=fast.next;
         while(fast.next!=null){
