@@ -8,8 +8,12 @@
  *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
+
+// Hey, This might not be best approach, but easy to understand!
+// Logic- Find the mid and then reverse the LinkedList from the mid
 class Solution {
     
+    //find mid of the linkedList
     public ListNode findMid(ListNode head) {
         ListNode slow=head;
         ListNode fast=head;
@@ -20,6 +24,7 @@ class Solution {
         return slow;
     }
     
+    //reverse the linkedList
     public ListNode reverse(ListNode head) {
         ListNode prev=null;
         ListNode curr=head;
@@ -34,11 +39,18 @@ class Solution {
     }
     
     public boolean isPalindrome(ListNode head) {
+        
+        // check for empty or if only one element present in the linkedList
         if(head==null || head.next==null) return true;
         
+        //find the middle
         ListNode mid= findMid(head);
+        
         ListNode newHead=mid.next;
+        
+        //to reverse from the middle
         newHead=reverse(newHead);
+        
         mid.next=null;
         ListNode c1=head;
         ListNode c2=newHead;
@@ -52,6 +64,7 @@ class Solution {
             c2=c2.next;
         }
         
+        //to return the original linkedList
         newHead=reverse(newHead);
         mid.next=newHead;
         return res;
