@@ -1,22 +1,14 @@
 class Solution {
     public int reverse(int x) {
-        long rev=0;
-        if(x>0){
-           while(x>0){
-                rev= rev*10 + x%10;
-                x=x/10;
-            } 
-        } else {
-            x*=-1;
-            while(x>0){
-                rev= rev*10 + x%10;
-                x=x/10;
-            }
-            rev*=-1;
+        int rev=0;
+        int temp=x;
+        while(temp!=0){
+            int d=temp%10;
+            if((rev>Integer.MAX_VALUE/10)||(rev<Integer.MIN_VALUE/10))
+                return 0;
+            rev=(rev*10)+d;
+            temp/=10;
         }
-        if (rev > 2147483647 || rev < -2147483647){
-            rev=0;
-        }
-        return (int)rev;
+        return rev;
     }
 }
