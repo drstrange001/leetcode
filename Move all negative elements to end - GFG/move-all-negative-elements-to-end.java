@@ -39,7 +39,7 @@ class GFG {
 
 class Solution {
     
-    public void segregateElements(int arr[], int n)
+    public void approach1(int arr[], int n)
     {
        int[] res = new int[arr.length];
        int left = 0, right = arr.length - 1;
@@ -58,5 +58,42 @@ class Solution {
        for(int idx = 0; idx < res.length; idx++){
            arr[idx] = res[idx];
        }
+    }
+    
+    public void reverse(int[] nums, int left, int right){
+        while(left < right){
+            int temp = nums[left];
+            nums[left] = nums[right];
+            nums[right] = temp;
+            left++; right--;
+        }
+    }
+    
+    public void merge(int[] nums, int left, int mid, int right){
+        int p1 = left;
+        while(p1 <= mid && nums[p1] >= 0) p1++;
+        
+        int p2 = mid + 1;
+        while(p2 <= right && nums[p2] >= 0) p2++;
+        
+        reverse(nums, p1, mid);
+        reverse(nums, mid + 1, p2 - 1);
+        reverse(nums, p1, p2 - 1);
+    }
+    
+    public void mergeSort(int[] nums, int left, int right){
+        if(left == right) return;
+        
+        int mid = (left + right) / 2;
+        mergeSort(nums, left, mid);
+        mergeSort(nums, mid + 1, right);
+        merge(nums, left, mid, right);
+        
+    }
+    
+    public void segregateElements(int arr[], int n)
+    {
+        // Your code goes here
+        mergeSort(arr, 0, n - 1);
     }
 }
