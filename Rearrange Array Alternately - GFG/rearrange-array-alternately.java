@@ -65,8 +65,27 @@ class Solution{
        }
    }
    
+   public static void quotientRemainder(long[] nums, int n){
+       long max = 10000007;
+       int left = 0, right = n - 1;
+       
+       for(int idx = 0; idx < n; idx++){
+           long oldVal = nums[idx]; 
+           long newVal = (idx % 2 == 0)
+                         ? nums[right--] % max
+                         : nums[left++] % max;
+                         
+            nums[idx] = oldVal + (newVal % max) * max;
+       }
+       
+       for(int idx = 0; idx < n; idx++){
+           nums[idx] = nums[idx] / max;
+       }
+   }
+   
     public static void rearrange(long arr[], int n){
-        minMaxSort(arr, n);
+        //minMaxSort(arr, n);
+        quotientRemainder(arr, n);
     }
     
 }
